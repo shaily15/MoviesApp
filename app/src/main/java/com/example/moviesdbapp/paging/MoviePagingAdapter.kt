@@ -14,10 +14,8 @@ import com.example.moviesdbapp.R
 import com.example.moviesdbapp.data.models.Results
 import javax.inject.Inject
 
-class MoviePagingAdapter @Inject constructor(): PagingDataAdapter<Results, MoviePagingAdapter.MovieViewHolder>(COMPARATOR) {
+class MoviePagingAdapter(): PagingDataAdapter<Results, MoviePagingAdapter.MovieViewHolder>(COMPARATOR) {
 
-    var onItemClick: ((Results) -> Unit)? = null
-    var movieItem: List<Results> = emptyList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
         return MovieViewHolder(view)
