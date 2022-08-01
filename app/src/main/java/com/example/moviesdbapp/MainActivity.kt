@@ -2,10 +2,10 @@ package com.example.moviesdbapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.moviesdbapp.paging.LoadAdapter
 import com.example.moviesdbapp.paging.MoviePagingAdapter
 import com.example.moviesdbapp.viemodel.MovieViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,7 +27,10 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = adapter
+        recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
+            header = LoadAdapter(),
+            footer = LoadAdapter()
+        )
 
         viewModel.moviesList.observe(this) { it ->
             adapter.submitData(lifecycle, it)
