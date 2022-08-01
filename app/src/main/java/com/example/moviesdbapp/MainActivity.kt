@@ -2,7 +2,9 @@ package com.example.moviesdbapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesdbapp.paging.LoadAdapter
@@ -10,6 +12,7 @@ import com.example.moviesdbapp.paging.MoviePagingAdapter
 import com.example.moviesdbapp.viemodel.MovieViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+@ExperimentalPagingApi
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
@@ -35,5 +38,8 @@ class MainActivity : AppCompatActivity() {
         viewModel.moviesList.observe(this) { it ->
             adapter.submitData(lifecycle, it)
         }
+
+        adapter.onItemClick = { movie ->
+            Toast.makeText(applicationContext, "${movie.name}", Toast.LENGTH_SHORT).show() }
     }
 }
