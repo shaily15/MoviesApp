@@ -38,8 +38,5 @@ class MainActivity : AppCompatActivity() {
         viewModel.moviesList.observe(this) { it ->
             adapter.submitData(lifecycle, it)
         }
-
-        adapter.onItemClick = { movie ->
-            Toast.makeText(applicationContext, "${movie.name}", Toast.LENGTH_SHORT).show() }
     }
 }
