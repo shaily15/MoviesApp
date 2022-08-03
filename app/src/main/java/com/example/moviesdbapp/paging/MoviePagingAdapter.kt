@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.moviesdbapp.R
 import com.example.moviesdbapp.data.models.Results
+import com.example.moviesdbapp.utils.Constants.IMAGE_PATH
 import javax.inject.Inject
 
 class MoviePagingAdapter(): PagingDataAdapter<Results, MoviePagingAdapter.MovieViewHolder>(COMPARATOR) {
@@ -24,9 +25,9 @@ class MoviePagingAdapter(): PagingDataAdapter<Results, MoviePagingAdapter.MovieV
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val item = getItem(position)
         if(item != null) {
-            holder.tvMovieName.text = item.name
+            holder.tvMovieName.text = item.title
             holder.tvMovieName.setOnClickListener {(holder.tvMovieName.setTextColor(Color.GREEN))} // click event
-            Glide.with(holder.itemView.context).load(item.posterPath)
+            Glide.with(holder.itemView.context).load("$IMAGE_PATH${item.poster_path.toString()}")
                 .centerCrop()
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .into(holder.ivMovieIcon)
