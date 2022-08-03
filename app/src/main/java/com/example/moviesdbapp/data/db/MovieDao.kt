@@ -7,7 +7,7 @@ import com.example.moviesdbapp.data.models.Results
 @Dao
 interface MovieDao {
 
-    @Query("Select * from Movie")
+    @Query("Select distinct * from Movie")
     fun getMovies(): PagingSource<Int, Results>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

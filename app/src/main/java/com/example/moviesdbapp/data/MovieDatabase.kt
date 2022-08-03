@@ -7,10 +7,8 @@ import com.example.moviesdbapp.data.db.RemoteKeysDao
 import com.example.moviesdbapp.data.models.MovieRemoteKeys
 import com.example.moviesdbapp.data.models.Results
 
-@Database(entities = [Results::class, MovieRemoteKeys::class], version = 1)
+@Database(entities = [Results::class, MovieRemoteKeys::class], version = 5)
 abstract class MovieDatabase: RoomDatabase() {
     abstract fun movieDao(): MovieDao
     abstract fun remoteKeysDao(): RemoteKeysDao
-
-
 }
