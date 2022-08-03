@@ -24,27 +24,27 @@ class MovieRemoteMediator(
     ): MediatorResult {
 
         return try {
-            val currentPage = 1
-//                when (loadType) {
-//                LoadType.REFRESH ->
-//                {
-//                    val remoteKeys = getRemoteKeyForClosestIndex(state)
-//                    remoteKeys?.nextPage?.minus(1) ?: 1
-//                }
-//                LoadType.PREPEND -> {
-//                    val remoteKeys = getRemoteKeysForFirstItem(state)
-//                    val prevPage = remoteKeys?.prevPage ?:
-//                    MediatorResult.Success(endOfPaginationReached = remoteKeys != null)
-//                    prevPage
-//                }
-//                LoadType.APPEND -> {
-//                    val remoteKeys = getRemoteKeysForLastItem(state)
-//                    val nextPage = remoteKeys?.nextPage ?:
-//                    MediatorResult.Success(endOfPaginationReached = remoteKeys != null)
-//                    nextPage
-//                }
+            val currentPage =
+                when (loadType) {
+                LoadType.REFRESH ->
+                {
+                    val remoteKeys = getRemoteKeyForClosestIndex(state)
+                    remoteKeys?.nextPage?.minus(1) ?: 1
+                }
+                LoadType.PREPEND -> {
+                    val remoteKeys = getRemoteKeysForFirstItem(state)
+                    val prevPage = remoteKeys?.prevPage ?:
+                    MediatorResult.Success(endOfPaginationReached = remoteKeys != null)
+                    prevPage
+                }
+                LoadType.APPEND -> {
+                    val remoteKeys = getRemoteKeysForLastItem(state)
+                    val nextPage = remoteKeys?.nextPage ?:
+                    MediatorResult.Success(endOfPaginationReached = remoteKeys != null)
+                    nextPage
+                }
 
-//            }
+            }
 
             val response = moviesAPI.getMovieList(currentPage as Int)
             Log.d("response 123 : ", "load: " + response.toString())

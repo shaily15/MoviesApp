@@ -1,14 +1,18 @@
 package com.example.moviesdbapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.paging.ExperimentalPagingApi
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesdbapp.paging.LoadAdapter
 import com.example.moviesdbapp.paging.MoviePagingAdapter
+import com.example.moviesdbapp.ui.DetailsActivity
 import com.example.moviesdbapp.viemodel.MovieViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         adapter = MoviePagingAdapter()
         viewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = GridLayoutManager(this, 2)
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
             header = LoadAdapter(),
@@ -36,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         )
 
         viewModel.moviesList.observe(this) { it ->
+
             adapter.submitData(lifecycle, it)
         }
     }
